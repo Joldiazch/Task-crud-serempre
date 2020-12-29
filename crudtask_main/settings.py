@@ -37,9 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
     'apps.crud',
     'apps.graphql_api',
+    'graphene_django',
+    'corsheaders',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'crudtask_main.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'crudtask_main.urls'
 
@@ -70,6 +80,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'crudtask_main.wsgi.application'
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 
 # Database
