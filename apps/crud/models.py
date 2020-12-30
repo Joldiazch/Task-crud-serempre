@@ -1,13 +1,17 @@
 from django.db import models
 
-# Create your models here.
-
 class Task(models.Model):
-    title = models.CharField(max_length=32)
-    description = models.CharField(max_length=500)
+    """ Task representation model  """
+    title = models.CharField(max_length=32, null=True)
+    description = models.CharField(max_length=500, null=True)
+    estimated_time = models.IntegerField(null=True)
+    worked_time = models.FloatField(null=True)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+
 
     def __str__(self):
-        return title
+        return self.title
 
     class Meta:
         db_table = ''
