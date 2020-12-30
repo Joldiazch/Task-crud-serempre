@@ -2,7 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+#migrations
+0*_*.py
 # C extensions
 *.so
 # DB
