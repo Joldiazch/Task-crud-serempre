@@ -4,39 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <title>Todo list</title>
 </head>
 <body>
-    <div class="page-content page-container" id="page-content">
-        <div class="padding">
-            <div class="row container d-flex justify-content-center">
-                <div class="col-md-12">
-                    <div class="card px-3">
-                        <div class="card-body">
-                            <h4 class="card-title">Awesome Todo list</h4>
-                            <div class="add-items d-flex"> <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button> </div>
-                            <div class="list-wrapper">
-                                <ul class="d-flex flex-column-reverse todo-list">
-                                    <li>
-                                        <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> For what reason would it be advisable. <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline"></i>
-                                    </li>
-                                    <li class="completed">
-                                        <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox" checked=""> For what reason would it be advisable for me to think. <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> it be advisable for me to think about business content? <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> Print Statements all <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline"></i>
-                                    </li>
-                                    <li class="completed">
-                                        <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox" checked=""> Call Rampbo <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox"> Print bills <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline"></i>
-                                    </li>
-                                </ul>
+    <div class="container">
+        <div class="page-content page-container" id="page-content">
+            <div class="padding">
+                <div class="row container d-flex justify-content-center">
+                    <div class="col-md-12">
+                        <div class="card px-3">
+                            <div class="card-body">
+                                <h4 class="card-title">Awesome Todo list</h4>
+                                <div class="add-items d-flex"> <input type="text" id="createTaskInputTitle" class="form-control todo-list-input" placeholder="What do you need to do today?" maxlength="32"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add</button> </div>
+                                <div class="list-wrapper">
+                                    <ul class="d-flex flex-column-reverse todo-list" id="task-list">
+                                        {% comment %} li elemente Here {% endcomment %}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -44,5 +31,118 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Update task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form role="form">
+                <div class="form-group float-label-control">
+                    <label for="">Title</label>
+                    <input id="title" type="text" class="form-control" placeholder="Title" maxlength="32">
+                </div>
+                <div class="form-group float-label-control">
+                    <label for="">Description</label>
+                    <textarea class="form-control" placeholder="Description" rows="1"></textarea>
+                </div>
+                <div class="form-group float-label-control">
+                    <label for="">Estimated Time</label>
+                    <input id="estimatedTime" type="number" class="form-control" placeholder="Estimated Time">
+                </div>
+                <div class="form-group float-label-control">
+                    <label for="">Worked Time</label>
+                    <input id="workedTime" type="text" class="form-control" placeholder="Worked Time" disabled>
+                </div>
+                <div class="form-group float-label-control">
+                    <label for="">Time Left</label>
+                    <input id="timeLeft" type="text" class="form-control" placeholder="Time Left" disabled>
+                </div>
+                <div class="form-group float-label-control">
+                    <label for="">Latitude</label>
+                    <input id="latitude" type="text" class="form-control" placeholder="Latitude" disabled>
+                </div>
+                <div class="form-group float-label-control">
+                    <label for="">Longitude</label>
+                    <input id="longitude" type="text" class="form-control" placeholder="Longitude" disabled>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-outline-primary" onclick="enableWorkedTimeInput()"><i class="fas fa-business-time"></i> Edit worked time</button>
+            <button type="button" class="btn btn-primary" name="save">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createTaskModalLabel">Update task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group float-label-control">
+                            <label for="">Title</label>
+                            <input id="create-title" type="text" class="form-control" placeholder="Title">
+                        </div>
+                        <div class="form-group float-label-control">
+                            <label for="">Description</label>
+                            <textarea class="form-control" placeholder="Description" rows="1"></textarea>
+                        </div>
+                        <div class="form-group float-label-control">
+                            <label for="">Estimated Time</label>
+                            <input id="create-estimatedTime" type="number" class="form-control" placeholder="Estimated Time">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" name="create">Create Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <!-- <script>
+        function writeTasks() {
+            let Query = {
+                query : `
+                {
+                    allTasks{
+                    id
+                    title
+                    description
+                    estimatedTime
+                    workedTime
+                    latitude
+                    longitude
+                    }
+                }
+                `
+            }
+            fetch("http://localhost/graphql/", {
+                method: "POST",
+                body: JSON.stringify(Query),
+                headers: new Headers({
+                    'X-CSRFTOKEN': '{{ csrf_token }}',
+                })
+            }).then(res => {
+                console.log("Request complete! response:", res);
+                window.location.reload(true);
+            });
+        }
+        writeTasks()
+    </script> -->
 </body>
 </html>
